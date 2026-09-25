@@ -235,3 +235,8 @@ python scripts/fabricate_sample_data.py --customers 100 --output-dir Dataset/sam
 - In accordance with data privacy and public repository best practices, large raw production datasets are omitted via `.gitignore`.
 - Pre-packaged **fabricated sample datasets** (`dim_customers_sample.csv`, `fact_spends_sample.csv`) and the automated generator script (`scripts/fabricate_sample_data.py`) are provided for testing, code review, and full reproducibility.
 - All DAX code, Power Query scripts, theme definitions, presentation decks, and analytical documentation are original open-source deliverables.
+
+---
+**Built by :**
+- [Anshul](https://github.com/morid648) 
+- [LinkedIn](https://www.linkedin.com/in/anshul-chaudhary-508138308/)
