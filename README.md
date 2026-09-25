@@ -172,10 +172,14 @@ The migrated Power BI solution comprises 5 interactive analytical pages:
 
 ```
 ├── README.md                                 ← You are here: Recruiter-friendly Executive Summary
-├── Dataset/                                  ← Raw transactions, customer profiles & schema
-│   ├── dim_customers.csv                     ← 4,000 demographic profiles
-│   ├── fact_spends.csv                       ← 864,000 spend transactions (May–Oct 2023)
-│   └── meta_data.txt                         ← Source data dictionary
+├── Dataset/                                  ← Schema, data dictionaries & fabricated samples
+│   ├── samples/                              ← Pre-generated synthetic sample datasets
+│   │   ├── dim_customers_sample.csv          ← 50 synthetic customer profiles
+│   │   └── fact_spends_sample.csv            ← 10,800 synthetic spend records
+│   ├── dim_customers_sample.csv              ← Root sample customer profile CSV
+│   ├── fact_spends_sample.csv                ← Root sample spend transactions CSV
+│   ├── meta_data.txt                         ← Source data dictionary & schema
+│   └── README.md                             ← Dataset documentation & fabrication instructions
 ├── tableau/                                  ← Legacy source Tableau workbook & specs
 │   ├── Banking Strategic Dashboard.twbx      ← Original source Tableau packaged workbook
 │   └── Tableau Banking Dashboard - Supplement Document.xlsx
@@ -193,6 +197,7 @@ The migrated Power BI solution comprises 5 interactive analytical pages:
 │   ├── RESULTS.md                            ← Validation scorecard & KPI comparison diffs
 │   └── PROJECT_REPORT.md                     ← Final executive report & recommendations
 ├── scripts/
+│   ├── fabricate_sample_data.py              ← Synthetic data fabrication generator
 │   └── validate_metrics.py                   ← Python regression test suite (100% PASS, zero external deps)
 └── assets/                                   ← High-resolution visual screenshots & walkthrough GIF
     ├── 01-demographics-tab.png
@@ -210,29 +215,23 @@ The migrated Power BI solution comprises 5 interactive analytical pages:
 
 ## ⚡ Automated Test Suite Execution
 
-Validate all DAX calculations, demographic cuts, and defect reconciliations directly against raw CSV ground truth with zero external dependencies beyond pandas:
+Validate all DAX calculations, demographic cuts, and data model integrity directly via Python (supports both full datasets and sample datasets):
 
 ```bash
+# Validate against local full dataset (if present):
 python scripts/validate_metrics.py
-```
 
-```
-================================================================================
- MITRON BANK STRATEGIC INSIGHTS — KPI & DATA MODEL VERIFICATION
-================================================================================
-[PASS] Data Quality & Referential Integrity: (0 nulls, 0 duplicate keys, 4,000 cust, 864k spends)
-[PASS] Headline KPIs Verification: PASS (Spend ₹88.48M, Income ₹206.63M, Utilization 42.82%)
-[PASS] Segmentation Thresholds (Tableau >=80k / >=45k): PASS (Upper: 49, Middle: 2242, Lower: 1709)
-[PASS] Demographic Cuts (Mumbai 51.4%, Salaried IT 51.0%, Age 35-45 46.72%): PASS
-================================================================================
- ALL VERIFICATION CHECKS PASSED (100% Match to Shipped Dashboard & PRD)
-================================================================================
+# Validate against synthetic sample dataset:
+python scripts/validate_metrics.py --sample
+
+# Fabricate fresh synthetic data of custom size:
+python scripts/fabricate_sample_data.py --customers 100 --output-dir Dataset/samples
 ```
 
 ---
 
-## 🔒 Data Handling & Privacy
+## 🔒 Data Handling & Public Distribution
 
-This project strictly adheres to **codebasics.io** data terms:
-- Raw CSV files (`dim_customers.csv`, `fact_spends.csv`) and binary extracts (`.hyper`) are used strictly for educational/portfolio demonstration and are not redistributed for commercial use.
-- All DAX code, Power Query scripts, theme definitions, and analytical documentation are original open-source deliverables.
+- In accordance with data privacy and public repository best practices, large raw production datasets are omitted via `.gitignore`.
+- Pre-packaged **fabricated sample datasets** (`dim_customers_sample.csv`, `fact_spends_sample.csv`) and the automated generator script (`scripts/fabricate_sample_data.py`) are provided for testing, code review, and full reproducibility.
+- All DAX code, Power Query scripts, theme definitions, presentation decks, and analytical documentation are original open-source deliverables.

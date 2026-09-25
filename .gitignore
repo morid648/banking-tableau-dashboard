@@ -1,4 +1,4 @@
-﻿# Python
+# Python
 __pycache__/
 *.py[cod]
 *$py.class
@@ -14,3 +14,16 @@ Thumbs.db
 *.tmp
 .vscode/
 .idea/
+
+# Large / Raw Original Datasets (Excluded for Public GitHub Distribution)
+Dataset/fact_spends.csv
+Dataset/dim_customers.csv
+*.hyper
+*.csv.zip
+
+# Ensure Fabricated Samples and Metadata Are Explicitly Tracked
+!Dataset/samples/
+!Dataset/samples/*
+!Dataset/*_sample.csv
+!Dataset/meta_data.txt
+!Dataset/README.md

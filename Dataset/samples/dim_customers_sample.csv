@@ -1,0 +1,51 @@
+customer_id,age_group,city,occupation,gender,marital status,avg_income
+ATQCUS0001,25-34,Hyderabad,Salaried IT Employees,Female,Married,40832
+ATQCUS0002,45+,Chennai,Business Owners,Male,Married,55421
+ATQCUS0003,35-45,Hyderabad,Salaried IT Employees,Male,Married,62234
+ATQCUS0004,35-45,Chennai,Salaried Other Employees,Male,Single,51994
+ATQCUS0005,25-34,Bengaluru,Government Employees,Female,Married,45912
+ATQCUS0006,25-34,Hyderabad,Salaried IT Employees,Male,Married,36842
+ATQCUS0007,21-24,Mumbai,Salaried Other Employees,Female,Married,35212
+ATQCUS0008,45+,Mumbai,Freelancers,Female,Married,43332
+ATQCUS0009,35-45,Mumbai,Salaried IT Employees,Male,Married,57861
+ATQCUS0010,35-45,Delhi NCR,Salaried IT Employees,Female,Married,68237
+ATQCUS0011,21-24,Delhi NCR,Salaried IT Employees,Male,Married,49882
+ATQCUS0012,45+,Mumbai,Salaried IT Employees,Male,Married,55270
+ATQCUS0013,35-45,Chennai,Government Employees,Male,Married,62662
+ATQCUS0014,25-34,Delhi NCR,Freelancers,Male,Married,34236
+ATQCUS0015,25-34,Mumbai,Business Owners,Male,Single,67396
+ATQCUS0016,25-34,Delhi NCR,Freelancers,Female,Married,38180
+ATQCUS0017,25-34,Mumbai,Freelancers,Male,Married,24000
+ATQCUS0018,25-34,Chennai,Salaried IT Employees,Male,Single,39921
+ATQCUS0019,25-34,Mumbai,Freelancers,Male,Married,33870
+ATQCUS0020,25-34,Hyderabad,Salaried Other Employees,Male,Single,37596
+ATQCUS0021,35-45,Chennai,Freelancers,Female,Married,44370
+ATQCUS0022,21-24,Mumbai,Freelancers,Male,Married,60571
+ATQCUS0023,25-34,Mumbai,Salaried IT Employees,Male,Married,55008
+ATQCUS0024,25-34,Chennai,Salaried IT Employees,Male,Married,60655
+ATQCUS0025,25-34,Bengaluru,Salaried IT Employees,Male,Married,58840
+ATQCUS0026,35-45,Bengaluru,Salaried Other Employees,Male,Married,50559
+ATQCUS0027,25-34,Chennai,Freelancers,Female,Single,27227
+ATQCUS0028,25-34,Mumbai,Freelancers,Male,Married,35821
+ATQCUS0029,35-45,Delhi NCR,Salaried IT Employees,Female,Single,58971
+ATQCUS0030,21-24,Mumbai,Salaried Other Employees,Male,Married,32342
+ATQCUS0031,35-45,Chennai,Salaried Other Employees,Male,Single,42602
+ATQCUS0032,25-34,Bengaluru,Salaried IT Employees,Male,Married,50118
+ATQCUS0033,21-24,Delhi NCR,Salaried IT Employees,Female,Married,72446
+ATQCUS0034,45+,Mumbai,Salaried IT Employees,Female,Married,48027
+ATQCUS0035,45+,Delhi NCR,Government Employees,Male,Married,65290
+ATQCUS0036,35-45,Delhi NCR,Salaried IT Employees,Female,Single,50572
+ATQCUS0037,25-34,Bengaluru,Salaried Other Employees,Female,Married,30696
+ATQCUS0038,21-24,Bengaluru,Business Owners,Male,Married,67467
+ATQCUS0039,35-45,Chennai,Salaried Other Employees,Male,Married,46449
+ATQCUS0040,25-34,Delhi NCR,Government Employees,Male,Married,35578
+ATQCUS0041,21-24,Mumbai,Government Employees,Male,Single,38477
+ATQCUS0042,25-34,Bengaluru,Salaried IT Employees,Female,Single,56095
+ATQCUS0043,21-24,Chennai,Salaried Other Employees,Female,Single,28887
+ATQCUS0044,45+,Bengaluru,Salaried IT Employees,Male,Married,68864
+ATQCUS0045,25-34,Chennai,Salaried IT Employees,Male,Married,49755
+ATQCUS0046,35-45,Delhi NCR,Salaried IT Employees,Male,Single,60183
+ATQCUS0047,25-34,Delhi NCR,Business Owners,Female,Married,80127
+ATQCUS0048,25-34,Delhi NCR,Salaried Other Employees,Female,Single,38437
+ATQCUS0049,25-34,Mumbai,Salaried IT Employees,Female,Single,29048
+ATQCUS0050,25-34,Mumbai,Salaried IT Employees,Female,Single,51164
