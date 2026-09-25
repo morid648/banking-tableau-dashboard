@@ -1,0 +1,110 @@
+// ==============================================================================
+// Canonical DAX Model & Measure Library
+// Project: Mitron Bank Credit Card Strategic Insights Dashboard
+// Reference: architecture.md §3, rules.md R1–R8, memory.md D1–D5
+// ==============================================================================
+
+// ------------------------------------------------------------------------------
+// 1. CALCULATED COLUMNS
+// ------------------------------------------------------------------------------
+
+// Table: dim_customers
+// Note: Uses verified Tableau thresholds (>=80k Upper, >=45k Middle, else Lower)
+// Do NOT replace with Banking_power_BI_dax_formulas.xlsx threshold (<=44k, <=64k) per memory.md D1.
+customer_segmentation = 
+VAR Class = dim_customers[avg_income]
+RETURN
+    IF(
+        Class >= 80000, "Upper Class",
+        IF(
+            Class >= 45000, "Middle Class",
+            "Lower Class"
+        )
+    )
+
+// Table: Dates (if created as DAX calculated table)
+Dates = 
+DISTINCT(SELECTCOLUMNS(fact_spends, "MonthName", fact_spends[month]))
+
+month_index = 
+MONTH(DATEVALUE("01-" & Dates[MonthName] & "-2023"))
+
+// Note: Ensure Dates[MonthName] is sorted by Dates[month_index] in Model View.
+
+
+// ------------------------------------------------------------------------------
+// 2. STAR SCHEMA RELATIONSHIPS
+// ------------------------------------------------------------------------------
+// Relationship 1:
+// From: fact_spends[customer_id] (Many) -> To: dim_customers[customer_id] (One)
+// Cardinality: Many-to-One (*:1)
+// Cross filter direction: Single (dim_customers filters fact_spends)
+// Active: True
+
+// Relationship 2:
+// From: fact_spends[month] (Many) -> To: Dates[MonthName] (One)
+// Cardinality: Many-to-One (*:1)
+// Cross filter direction: Single (Dates filters fact_spends)
+// Active: True
+
+
+// ------------------------------------------------------------------------------
+// 3. CORE DAX MEASURES (Table: _Measures)
+// ------------------------------------------------------------------------------
+
+// 3.1 Total Spend (6-Month Cumulative Portfolio Spend)
+// Format: ₹ #,##0.00 M
+total_spend = 
+SUM(fact_spends[spend])
+
+
+// 3.2 Active Customer Count
+// Format: #,##0
+active_customers = 
+COUNT(dim_customers[customer_id])
+
+
+// 3.3 Average Income (Portfolio-level sum across all active customer profiles)
+// Format: ₹ #,##0.00 M
+// Note: Naming convention preserved from source Tableau model.
+average_income = 
+SUM(dim_customers[avg_income])
+
+
+// 3.4 Average Spends (Portfolio-level monthly normalized spend)
+// Format: ₹ #,##0.00 M
+average_spends = 
+[total_spend] / DISTINCTCOUNT(fact_spends[month])
+
+
+// 3.5 Average Monthly Income (Per-customer monthly income)
+// Format: ₹ #,##0
+avg_monthly_income = 
+DIVIDE([average_income], [active_customers], 0)
+
+
+// 3.6 Average Monthly Spend (Per-customer monthly spend)
+// Format: ₹ #,##0
+avg_monthly_spend = 
+DIVIDE([average_spends], [active_customers], 0)
+
+
+// 3.7 Income Utilisation % (Headline KPI - Portfolio-level)
+// Format: 0.00%
+// Formula: Portfolio Average Spend ÷ Portfolio Average Income
+income_utilisation % = 
+DIVIDE([average_spends], [average_income], 0)
+
+
+// 3.8 Income Utilization (Customer / Demographic Group Grain)
+// Format: 0.00%
+// Formula: Per-Customer Monthly Spend ÷ Per-Customer Monthly Income
+income_utilization = 
+DIVIDE([avg_monthly_spend], [avg_monthly_income], 0)
+
+
+// ------------------------------------------------------------------------------
+// 4. DETAILED VIEW COLUMN DEFECT FIX (memory.md D2, prd.md §7.2)
+// ------------------------------------------------------------------------------
+// Detailed View Column 6: Labeled "Avg Monthly Spend" (replaces misleading "Total Spend" label)
+// Formula: [avg_monthly_spend]
